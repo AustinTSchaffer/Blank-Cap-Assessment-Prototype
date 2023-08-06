@@ -1,0 +1,38 @@
+/* Columnar Layout */
+.right-sidebar-layout {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    border-top: 1px solid black;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+.subtotal-display {
+    border-top: 1px solid black;
+    text-align: center;
+}
+
+section {
+    padding-top: 1.5rem;
+}
+
+.right-sidebar-layout p {
+    margin: 0.2rem
+}
+
+.right-sidebar-layout > * {
+    width: 100%;
+}
+
+@media (min-width:768px) {
+    .right-sidebar-layout > *:nth-child(1) {
+        width:calc(50%);
+    }
+
+    .right-sidebar-layout > *:nth-child(2) {
+        width:calc(50%);
+    }
+}

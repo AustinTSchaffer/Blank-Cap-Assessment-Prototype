@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Blank-Cap Assessment Prototype</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Blank-Cap ADL Assessment (Rough Prototype)</h1>
+    </header>
+    <main>
+        <section id="bathing">
+            <h2>Bathing</h2>
+
+            <div class="right-sidebar-layout">
+                <label for="bathing-type">
+                    <p><strong>Bathing type</strong></p>
+
+                </label>
+                <select name="bathing-type" id="bathing-type">
+                    <option value="2">Shower/Tub Bath (x2)</option>
+                    <option value="1">Spongebath (x1)</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="bathing-setup-and-cleanup">
+                    <p><strong>Set-up and clean-up of environment</strong></p>
+                    <p>towel/washcloth placement, turn on water, adjust temperature, placement of equipment and supplies
+                    </p>
+                </label>
+                <select name="bathing-setup-and-cleanup" id="bathing-setup-and-cleanup">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="bathing-transfer-in">
+                    <p><strong>Transfer into tub or shower safely</strong></p>
+                    <p>score 0 for spongebath</p>
+                </label>
+                <select name="bathing-transfer-in" id="bathing-transfer-in">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="bathing-upper-body">
+                    <p><strong>Perform upper body bathing techniques</strong></p>
+                    <p>does not include washing back</p>
+                </label>
+                <select name="bathing-upper-body" id="bathing-upper-body">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="bathing-lower-body">
+                    <p><strong>Perform lower body bathing techniques</strong></p>
+                </label>
+                <select name="bathing-lower-body" id="bathing-lower-body">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="bathing-wash-and-rinse-hair">
+                    <p><strong>Wash & rinse hair</strong></p>
+                    <p>score 4 if no hair</p>
+                </label>
+                <select name="bathing-wash-and-rinse-hair" id="bathing-wash-and-rinse-hair">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="bathing-dry-self">
+                    <p><strong>Dry self</strong></p>
+                    <p>includes reaching for towel, does not include drying hair</p>
+                </label>
+                <select name="bathing-dry-self" id="bathing-dry-self">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="bathing-transfer-out">
+                    <p><strong>Transfer out of tub or shower safely</strong></p>
+                    <p>score 0 for spongebath</p>
+                </label>
+                <select name="bathing-dry-self" id="bathing-dry-self">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="subtotal-display">
+                <p><strong>Total Bathing Score:</strong> <span id="bathing-score">?</span> of 56</p>
+            </div>
+
+            <script type="text/javascript">
+                function calculateBathingScore() {
+                    var factor = document.getElementById("bathing-type").value
+                    var total = 0
+                    document.querySelectorAll("#bathing select").forEach(element => {
+                        if (element.id !== 'bathing-type') {
+                            total += parseInt(element.value)
+                        }
+                    })
+
+                    var bathingScore = total * factor
+                    return bathingScore
+                }
+
+                document.querySelectorAll("#bathing select").forEach(element => {
+                    element.addEventListener("change", (event) => {
+                        document.getElementById("bathing-score").innerText = calculateBathingScore()
+                    })
+                })
+
+                document.addEventListener("DOMContentLoaded", function () {
+                    document.getElementById("bathing-score").innerText = calculateBathingScore()
+                });
+            </script>
+        </section>
+
+        <section id="dressing">
+            <h2>Dressing</h2>
+
+            <div class="right-sidebar-layout">
+                <label for="dressing-retrieval">
+                    <p><strong>Clothing retrieval</strong></p>
+                </label>
+                <select name="dressing-retrieval" id="dressing-retrieval">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="dressing-don-doff-tshirt">
+                    <p><strong>Don & doff T-shirt</strong></p>
+                </label>
+                <select name="dressing-don-doff-tshirt" id="dressing-don-doff-tshirt">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="dressing-don-doff-front-openend-shirt">
+                    <p><strong>Don & doff front-opened shirt, sweater, or jacket *</strong></p>
+                    <p>does not include manipulating fasteners</p>
+                </label>
+                <select name="dressing-don-doff-front-openend-shirt" id="dressing-don-doff-front-openend-shirt">
+                    <option value="4">Independent / Not Applicable [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="dressing-don-doff-undergarments">
+                    <p><strong>Don & doff undergarments</strong></p>
+                    <p>includes underwear, bra, etc.</p>
+                </label>
+                <select name="dressing-don-doff-undergarments" id="dressing-don-doff-undergarments">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="dressing-don-doff-pants">
+                    <p><strong>Don & doff pants/shorts/skirt</strong></p>
+                </label>
+                <select name="dressing-don-doff-pants" id="dressing-don-doff-pants">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="dressing-manipulate-fasteners">
+                    <p><strong>Manipulate fasteners</strong></p>
+                    <p>zippers, buttons, laces, and/or velcro depending upon patient's clothing</p>
+                </label>
+                <select name="dressing-manipulate-fasteners" id="dressing-manipulate-fasteners">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="dressing-don-doff-shoes">
+                    <p><strong>Don & doff shoes *</strong></p>
+                    <p>includes socks and/or hose</p>
+                </label>
+                <select name="dressing-don-doff-shoes" id="dressing-don-doff-shoes">
+                    <option value="4">Independent / Not Applicable [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="dressing-don-doff-medical-garments">
+                    <p><strong>Don & doff medical garments *</strong></p>
+                    <p>orthotics, prosthetics, compression stockings, braces, splints, etc. **</p>
+                </label>
+                <select name="dressing-don-doff-medical-garments" id="dressing-don-doff-medical-garments">
+                    <option value="4">Independent / Not Applicable [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="subtotal-display">
+                <p><strong>Total Dressing Score:</strong> <span id="dressing-score">?</span> of 32</p>
+
+                <p>* Score 4 if not applicable. Example: Lives in warm climate and has never worn a front-opening
+                    jacket.</p>
+                <p>** Does not include wound care items.</p>
+            </div>
+
+            <script type="text/javascript">
+                function calculateDressingScore() {
+                    var total = 0
+                    document.querySelectorAll("#dressing select").forEach(element => {
+                        total += parseInt(element.value)
+                    })
+
+                    return total
+                }
+
+                document.querySelectorAll("#dressing select").forEach(element => {
+                    element.addEventListener("change", (event) => {
+                        document.getElementById("dressing-score").innerText = calculateDressingScore()
+                    })
+                })
+
+                document.addEventListener("DOMContentLoaded", function () {
+                    document.getElementById("dressing-score").innerText = calculateDressingScore()
+                });
+            </script>
+        </section>
+
+        <section id="toileting">
+            <h2>Toileting</h2>
+
+            <div class="right-sidebar-layout">
+                <label for="toileting-type">
+                    <p><strong>Toileting type</strong></p>
+                </label>
+                <select name="toileting-type" id="toileting-type">
+                    <option value="2">Toilet in bathroom (x2)</option>
+                    <option value="1">Bedside commode or portable urinal outside of bathroom (x1)</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="toileting-access-transfer">
+                    <p><strong>Access and transfer to toilet</strong></p>
+                    <p>Score should be 3 or less for bedside commode outside of bathroom</p>
+                </label>
+                <select name="toileting-access-transfer" id="toileting-access-transfer">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="toileting-anterior-perineal-hygiene">
+                    <p><strong>Anterior perineal hygiene</strong></p>
+                    <p>includes menstrual hygiene *</p>
+                </label>
+                <select name="toileting-anterior-perineal-hygiene" id="toileting-anterior-perineal-hygiene">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="toileting-posterior-perineal-hygiene">
+                    <p><strong>Posterior perineal hygiene</strong></p>
+                </label>
+                <select name="toileting-posterior-perineal-hygiene" id="toileting-posterior-perineal-hygiene">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="toileting-clothing-management">
+                    <p><strong>Clothing Management</strong></p>
+                </label>
+                <select name="toileting-clothing-management" id="toileting-clothing-management">
+                    <option value="4">Independent [4]</option>
+                    <option value="3">Independent with adaptive device [3]</option>
+                    <option value="2">Supervision and verbal cues [2]</option>
+                    <option value="1">Physical Assistance [1]</option>
+                    <option value="0">Dependent (performs less than half of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="toileting-bladder-management">
+                    <p><strong>Bladder Management</strong></p>
+                </label>
+                <select name="toileting-bladder-management" id="toileting-bladder-management">
+                    <option value="4">Able to access toilet/urinal/device with no incontinence [4]</option>
+                    <option value="3">Independent with intermittent/condom/purewick catheterization [3]</option>
+                    <option value="3">Can empty foley catheter bag with no reported accidents  [3]</option>
+                    <option value="2">Able to manage devices and/or has at least 1 accident within 24 hours [2]</option>
+                    <option value="1">Requires assistance with managing devices and/or has more than 2 accidents within 24 hours [1]</option>
+                    <option value="0">Completely incontinent and/or unable to  manage devices without assistance (performs less than 50% of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="right-sidebar-layout">
+                <label for="toileting-bowel-management">
+                    <p><strong>Bowel Management</strong></p>
+                </label>
+                <select name="toileting-bowel-management" id="toileting-bowel-management">
+                    <option value="4">Able to access toilet/urinal/device with no incontinence [4]</option>
+                    <option value="3">Independent with intermittent/condom/purewick catheterization [3]</option>
+                    <option value="3">Can empty foley catheter bag with no reported accidents  [3]</option>
+                    <option value="2">Able to manage devices and/or has at least 1 accident within 24 hours [2]</option>
+                    <option value="1">Requires assistance with managing devices and/or has more than 2 accidents within 24 hours [1]</option>
+                    <option value="0">Completely incontinent and/or unable to  manage devices without assistance (performs less than 50% of action) [0]</option>
+                </select>
+            </div>
+
+            <div class="subtotal-display">
+                <p><strong>Total Toileting Score:</strong> <span id="toileting-score">?</span> of 48</p>
+                <p>* Menstrual sanitary products are not considered adaptive devices</p>
+            </div>
+
+            <script type="text/javascript">
+                function calculateToiletingScore() {
+                    var factor = document.getElementById("toileting-type").value
+                    var total = 0
+                    document.querySelectorAll("#toileting select").forEach(element => {
+                        if (element.id !== 'toileting-type') {
+                            total += parseInt(element.value)
+                        }
+                    })
+
+                    var toiletingScore = total * factor
+                    return toiletingScore
+                }
+
+                document.querySelectorAll("#toileting select").forEach(element => {
+                    element.addEventListener("change", (event) => {
+                        document.getElementById("toileting-score").innerText = calculateToiletingScore()
+                    })
+                })
+
+                document.addEventListener("DOMContentLoaded", function () {
+                    document.getElementById("toileting-score").innerText = calculateToiletingScore()
+                });
+            </script>
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br> <!-- TODO: A Footer of some kind should go here. -->
+            <br>
+            <br>
+            <br> 
+            <br>
+            <br>
+
+        </section>
+    </main>
+</body>
+
+</html>
